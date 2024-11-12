@@ -7,12 +7,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag nopcommerce:$(date +%s)
+      run: docker build . --file Dockerfile --tag kraigoavant/nopcommerce:$(date +%Y%m%d%H%M%S)  # Use your Docker Hub username and image name
+
+    - name: Push Docker image to Docker Hub
+      run: docker push kraigoavant/nopcommerce:$(date +%Y%m%d%H%M%S)
